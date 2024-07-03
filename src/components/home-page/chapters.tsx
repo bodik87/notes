@@ -1,0 +1,66 @@
+import { Link } from "react-router-dom";
+import { useLocalStorage } from "usehooks-ts";
+import { IChapter, IFolder } from "../../lib/types";
+import { ChapterIcon, FolderIcon } from "../icons";
+import { useState } from "react";
+import { Ellipsis } from "lucide-react";
+
+export default function Chapters() {
+  const [chapters] = useLocalStorage<IChapter[]>("chapters", []);
+
+  return (
+    <>
+      {chapters.length > 0 && (
+        <section className="mt-4 px-3 flex flex-col gap-5">
+          {chapters.map((chapter) => (
+            <ChapterItem key={chapter.id} chapter={chapter} />
+          ))}
+        </section>
+      )}
+    </>
+  );
+}
+
+type Props = { chapter: IChapter };
+
+function ChapterItem({ chapter }: Props) {
+  const [folders] = useLocalStorage<IFolder[]>("folders", []);
+  const [foldersList, setFoldersList] = useState(false);
+  return (
+    <>
+      <div className="flex">
+        <button
+          className="w-full flex items-center gap-3 text-lg"
+          onClick={() => setFoldersList(!foldersList)}
+        >
+          <ChapterIcon />
+          {chapter.chapterTitle}
+        </button>
+
+        <Link
+          className="btn bg-app-blue/15 text-app-blue"
+          to={`/chapter/${chapter.id}`}
+        >
+          <Ellipsis />
+        </Link>
+      </div>
+
+      {foldersList && (
+        <div>
+          {folders
+            .filter((folder) => folder.chapterId === chapter.id)
+            .map((folder) => (
+              <Link
+                to={`/folders/${folder.id}`}
+                key={folder.id}
+                className="ml-5 mb-5 last:mb-0 w-full flex gap-3 items-center whitespace-nowrap"
+              >
+                <FolderIcon />
+                {folder.folderTitle}
+              </Link>
+            ))}
+        </div>
+      )}
+    </>
+  );
+}
