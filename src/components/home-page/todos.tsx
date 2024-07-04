@@ -1,19 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocalStorage } from "usehooks-ts";
 import { v4 as uuidv4 } from "uuid";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { Reorder, useDragControls } from "framer-motion";
 import { ITodo } from "../../lib/types";
 import { text } from "../../lang";
-import Modal from "../modal";
-import { PlusIcon, TodoCheckedIcon, TodoIcon } from "../icons";
+import { TodoCheckedIcon, TodoIcon } from "../icons";
 import { cn } from "../../lib/utils";
 import Chip from "../chip";
+import Modal from "../modal";
 
 type Inputs = { todoBody: string };
 
 export default function Todos() {
   const [language] = useLocalStorage<string>("lang", "EN");
   const [todos, setTodos] = useLocalStorage<ITodo[]>("todos", []);
+  const [items, setItems] = useState(todos);
+
+  useEffect(() => {
+    setItems(todos);
+  }, [todos]);
 
   const [todoModal, setTodoModal] = useState(false);
 
@@ -37,6 +43,8 @@ export default function Todos() {
       setTodos(todos.filter((el) => el.id !== id));
     }
   };
+
+  console.log(items);
 
   return (
     <section className="mt-4 px-3">
@@ -80,16 +88,22 @@ export default function Todos() {
         </Modal>
       )}
 
-      <div className="flex flex-col gap-3 bg-app-gray p-4 rounded-3xl">
-        {todos.map((todo) => (
-          <TodoItem key={todo.id} todo={todo} />
-        ))}
+      <div className="bg-app-gray p-4 rounded-3xl">
+        <Reorder.Group
+          axis="y"
+          values={items}
+          onReorder={setItems}
+          className="flex flex-col gap-3"
+        >
+          {items.map((todo) => (
+            <TodoItem key={todo.id} todo={todo} items={items} />
+          ))}
+        </Reorder.Group>
 
         <button
           onClick={() => setTodoModal(true)}
-          className={cn("flex gap-3", todos.length > 0 && "mt-2")}
+          className={cn("btn bg-app-blue/15", todos.length > 0 && "mt-5")}
         >
-          <PlusIcon className="stroke-app-blue" />
           {text.addTodo[language]}
         </button>
       </div>
@@ -99,11 +113,14 @@ export default function Todos() {
 
 type TodoItemProps = {
   todo: ITodo;
+  items: ITodo[];
 };
 
-function TodoItem({ todo }: TodoItemProps) {
+function TodoItem({ items, todo }: TodoItemProps) {
+  const controls = useDragControls();
   const [todos, setTodos] = useLocalStorage<ITodo[]>("todos", []);
   const [isSelected, setIsSelected] = useState(todo.isCompleted);
+
   const handleChange = (todoId: string) => {
     setIsSelected(!isSelected);
     const updatedTodos = todos.map((todo) => {
@@ -115,15 +132,29 @@ function TodoItem({ todo }: TodoItemProps) {
     });
     setTodos(updatedTodos);
   };
+
   return (
-    <button
+    <Reorder.Item
+      key={todo.id}
+      value={todo}
+      onDragEnd={() => setTodos(items)}
+      dragListener={false}
+      dragControls={controls}
       className={cn(
-        "flex w-fit items-center gap-3 text-lg",
+        "flex w-fit items-center gap-3 text-lg select-none",
         todo.isCompleted ? "line-through text-app-gray-200" : ""
       )}
-      onClick={() => handleChange(todo.id)}
     >
-      {todo.isCompleted ? <TodoCheckedIcon /> : <TodoIcon />} {todo.todoBody}
-    </button>
+      <button className="z-10" onClick={() => handleChange(todo.id)}>
+        {todo.isCompleted ? <TodoCheckedIcon /> : <TodoIcon />}
+      </button>
+
+      <span
+        onPointerDown={(e) => controls.start(e)}
+        className="cursor-grab active:cursor-grabbing"
+      >
+        {todo.todoBody}
+      </span>
+    </Reorder.Item>
   );
 }

@@ -24,7 +24,6 @@ export default function HomePage() {
 
   const [textToCopyModal, setTextToCopyModal] = useState(false);
 
-  const newChapterId = uuidv4();
   const newQuickNoteId = uuidv4();
   return (
     <>
@@ -64,7 +63,7 @@ export default function HomePage() {
               <CopyIcon />
             </button>
 
-            <Link to={`/chapter/${newChapterId}`} className="btn bg-app-gray">
+            <Link to={`#`} className="btn bg-app-gray">
               <SearchIcon />
             </Link>
 
