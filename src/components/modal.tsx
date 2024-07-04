@@ -1,16 +1,24 @@
+import { cn } from "../lib/utils";
+
 type Props = {
+  center?: boolean;
   children: React.ReactNode;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export default function Modal({ setOpen, children }: Props) {
+export default function Modal({ center, setOpen, children }: Props) {
   return (
     <>
       <div
         onClick={() => setOpen(false)}
         className="bg-black/15 fixed inset-0 z-10"
       />
-      <div className="p-4 bg-white rounded-3xl fixed inset-x-3 top-3 max-w-md mx-auto shadow-md z-20">
+      <div
+        className={cn(
+          "p-4 bg-white rounded-3xl fixed max-w-md mx-auto shadow-md z-20",
+          center ? "inset-0 h-fit top-1/2 -translate-y-1/2" : "inset-x-3 top-3"
+        )}
+      >
         {children}
       </div>
     </>
