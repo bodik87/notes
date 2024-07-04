@@ -9,10 +9,13 @@ export interface IFolder {
   chapterId: string;
 }
 
+export type LinkType = { id: string; type: "link"; title: string; url: string };
+
 export interface IArticle {
   id: string;
   articleBody: string;
   folderId: string;
+  links?: LinkType[];
 }
 
 export interface IQuickNote {

@@ -9,8 +9,8 @@ import {
   Copy,
   Folder,
   Languages,
+  Link,
   Plus,
-  Search,
   Settings2,
   Text,
   Trash,
@@ -18,8 +18,8 @@ import {
 } from "lucide-react";
 import { cn } from "../lib/utils";
 
-export function SearchIcon() {
-  return <Search />;
+export function LinkIcon({ size }: { size?: number }) {
+  return <Link size={size} />;
 }
 
 export function ExpandIcon() {
