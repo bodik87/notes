@@ -40,7 +40,7 @@ function QuickNoteItem({ note }: QuickNoteProps) {
   return (
     <Link
       to={`/quick-notes/${note.id}`}
-      className="p-4 max-h-[180px] text-sm rounded-3xl bg-app-yellow-100 overflow-hidden"
+      className="p-4 max-h-[180px] text-sm rounded-2xl bg-app-yellow-100 overflow-hidden"
     >
       <ContentEditablePreview
         text={

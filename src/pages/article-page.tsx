@@ -122,7 +122,7 @@ export default function ArticlePage() {
           text={existedArticle ? existedArticle.articleBody : ""}
           setText={onSubmit}
           placeholder={text.note[language]}
-          className="p-4 rounded-3xl bg-app-gray text-base border-none focus:ring-0 focus:bg-app-gray hover:bg-app-gray"
+          className="px-1"
         />
       </section>
     </>

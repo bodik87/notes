@@ -6,7 +6,7 @@ type Props = {
   text: any;
   setText: any;
   placeholder: string;
-  className: string;
+  className?: string;
 };
 
 export default function ContentEditable({

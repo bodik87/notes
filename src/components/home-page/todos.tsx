@@ -114,7 +114,7 @@ export default function Todos() {
 
         <button
           onClick={() => setTodoModal(true)}
-          className={cn("btn bg-app-blue/15", todos.length > 0 && "mt-5")}
+          className={cn("btn bg-app-blue/15 !pr-5", todos.length > 0 && "mt-5")}
         >
           <PlusIcon className="stroke-app-blue" />
           {text.addTodo[language]}
