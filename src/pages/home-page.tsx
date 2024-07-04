@@ -1,11 +1,6 @@
 import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
-import {
-  CopyIcon,
-  QuickNoteIcon,
-  SearchIcon,
-  SettingsIcon,
-} from "../components/icons";
+import { CopyIcon, QuickNoteIcon, SettingsIcon } from "../components/icons";
 import Chapters from "../components/home-page/chapters";
 import QuickNotes from "../components/home-page/quick-notes";
 import PinnedNote from "../components/home-page/pinned-note";
@@ -62,10 +57,6 @@ export default function HomePage() {
             >
               <CopyIcon />
             </button>
-
-            <Link to={`#`} className="btn bg-app-gray">
-              <SearchIcon />
-            </Link>
 
             <Link className="btn bg-app-gray" to={"/user"}>
               <SettingsIcon />

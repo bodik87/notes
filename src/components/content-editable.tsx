@@ -50,6 +50,7 @@ export default function ContentEditable({
         className={`${className} focus:outline-none shadow-none`}
         data-placeholder={placeholder}
         contentEditable="true"
+        spellCheck={false}
         ref={textRef}
         onFocus={() => setEditTools(true)}
         onBlur={handleSaveText}
