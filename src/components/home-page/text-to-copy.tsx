@@ -1,41 +1,39 @@
 import { useLocalStorage } from "usehooks-ts";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { v4 as uuidv4 } from "uuid";
-import { ITextToCopy } from "../../lib/types";
-import { text } from "../../lang";
-import DraggableRow from "../draggable-row";
+import { CircleX, Copy } from "lucide-react";
+import { ISnippet } from "../../lib/types";
 import Modal from "../modal";
-import Chip from "../chip";
-import Snippet from "../snippet";
+import { text } from "../../lang";
 
-type Inputs = { textToCopy: string };
+type Inputs = { body: string };
 
-type TextToCopyProps = {
+type SnippetsProps = {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export default function TextToCopy({ open, setOpen }: TextToCopyProps) {
+export default function Snippets({ open, setOpen }: SnippetsProps) {
   const [language] = useLocalStorage<string>("lang", "EN");
-  const [texts, setTexts] = useLocalStorage<ITextToCopy[]>("texts", []);
+  const [snippets, setSnippets] = useLocalStorage<ISnippet[]>("snippets", []);
   const { register, handleSubmit, reset } = useForm<Inputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = ({ textToCopy }) => {
-    if (textToCopy) {
-      const newText = { id: uuidv4(), textToCopy };
-      if (texts.length === 0) {
-        setTexts([newText]);
+  const onSubmit: SubmitHandler<Inputs> = ({ body }) => {
+    if (body) {
+      const newText = { id: uuidv4(), body };
+      if (snippets.length === 0) {
+        setSnippets([newText]);
       } else {
-        setTexts([...texts, newText]);
+        setSnippets([...snippets, newText]);
       }
       reset();
       setOpen(false);
     }
   };
 
-  const handleClose = (id: string) => {
+  const deleteSnippet = (id: string) => {
     if (confirm(`${text.delete[language]}?`) === true) {
-      setTexts(texts.filter((el) => el.id !== id));
+      setSnippets(snippets.filter((snippet) => snippet.id !== id));
     }
   };
 
@@ -45,7 +43,7 @@ export default function TextToCopy({ open, setOpen }: TextToCopyProps) {
         <Modal setOpen={setOpen}>
           <form onSubmit={handleSubmit(onSubmit)}>
             <input
-              {...register("textToCopy", { required: true })}
+              {...register("body", { required: true })}
               placeholder={text.textToCopy[language]}
               autoComplete="off"
               spellCheck={"false"}
@@ -62,32 +60,33 @@ export default function TextToCopy({ open, setOpen }: TextToCopyProps) {
             </button>
           </form>
 
-          {texts.length > 0 && (
+          {snippets.length > 0 && (
             <div className="mt-4 flex flex-wrap gap-2">
-              {texts.map((text) => (
-                <Chip
-                  key={text.id}
-                  id={text.id}
-                  label={text.textToCopy}
-                  onClose={handleClose}
-                />
+              {snippets.map((snippet) => (
+                <div className="px-1.5 py-1 flex items-center flex-nowrap gap-2 bg-app-green/15 rounded-3xl whitespace-nowrap">
+                  <button
+                    className="w-8 h-8 flex items-center justify-center rounded-full active:bg-app-red/15 transition-all"
+                    onClick={() => deleteSnippet(snippet.id)}
+                  >
+                    <CircleX size={20} className="stroke-app-red" />
+                  </button>
+
+                  {snippet.body}
+
+                  <button
+                    className="w-8 h-8 flex items-center justify-center rounded-full active:bg-app-green/50 transition-all"
+                    onClick={() => {
+                      navigator.clipboard.writeText(snippet.body);
+                    }}
+                  >
+                    <Copy size={16} />
+                  </button>
+                </div>
               ))}
             </div>
           )}
         </Modal>
       )}
-
-      <section
-        className={`${
-          texts.length === 0 ? "mt-0" : "mt-4"
-        } flex gap-2 items-center text-sm`}
-      >
-        <DraggableRow>
-          {texts.map((text) => (
-            <Snippet key={text.id} label={text.textToCopy} />
-          ))}
-        </DraggableRow>
-      </section>
     </>
   );
 }

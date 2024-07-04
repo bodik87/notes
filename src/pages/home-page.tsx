@@ -1,14 +1,14 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
+import { useLocalStorage } from "usehooks-ts";
 import { CopyIcon, QuickNoteIcon, SettingsIcon } from "../components/icons";
 import Chapters from "../components/home-page/chapters";
 import QuickNotes from "../components/home-page/quick-notes";
 import PinnedNote from "../components/home-page/pinned-note";
-import TextToCopy from "../components/home-page/text-to-copy";
 import Todos from "../components/home-page/todos";
-import { useState } from "react";
-import { useLocalStorage } from "usehooks-ts";
 import Modal from "../components/modal";
+import Snippets from "../components/home-page/text-to-copy";
 
 export default function HomePage() {
   const [, setFirstStartModal] = useState(false);
@@ -59,7 +59,7 @@ export default function HomePage() {
         </div>
 
         <PinnedNote />
-        <TextToCopy open={textToCopyModal} setOpen={setTextToCopyModal} />
+        <Snippets open={textToCopyModal} setOpen={setTextToCopyModal} />
         <QuickNotes />
         <Todos />
         <Chapters />

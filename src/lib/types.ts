@@ -32,9 +32,9 @@ export interface IUser {
   password: string;
 }
 
-export interface ITextToCopy {
+export interface ISnippet {
   id: string;
-  textToCopy: string;
+  body: string;
 }
 
 export interface ITodo {
