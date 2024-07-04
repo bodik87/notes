@@ -139,7 +139,7 @@ function TodoItem({ items, todo }: TodoItemProps) {
       dragListener={false}
       dragControls={controls}
       className={cn(
-        "flex w-fit items-center gap-3 text-lg select-none",
+        "flex w-fit items-center gap-3 text-lg touch-none select-none",
         todo.isCompleted ? "line-through text-app-gray-200" : ""
       )}
     >
