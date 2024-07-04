@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import { IChapter, IFolder } from "../../lib/types";
 import { CollapseIcon, ExpandIcon, FolderIcon, PlusIcon } from "../icons";
 import { useEffect, useState } from "react";
-import { Ellipsis } from "lucide-react";
+import { ExternalLink, GripHorizontal } from "lucide-react";
 import { text } from "../../lang";
 import { Reorder, useDragControls } from "framer-motion";
 
@@ -72,7 +72,7 @@ function ChapterItem({ chapter, items, setChapters }: Props) {
         dragListener={false}
         dragControls={controls}
         dragConstraints={{ top: -20, bottom: 20 }}
-        className="flex items-center bg-app-blue/10 backdrop-blur-xl rounded-3xl pl-5 pr-1.5 py-1.5 touch-none"
+        className="flex items-center bg-app-blue/10 backdrop-blur-3xl rounded-3xl pl-5 pr-1.5 py-1.5 touch-none"
       >
         <button
           className="w-full flex items-center gap-3 text-lg font-medium"
@@ -87,15 +87,16 @@ function ChapterItem({ chapter, items, setChapters }: Props) {
           {currentFolders.length > 0 && (
             <span
               onPointerDown={(e) => controls.start(e)}
-              className="ml-auto cursor-grab active:cursor-grabbing"
+              className="btn bg-app-blue/15 ml-auto cursor-grab active:cursor-grabbing"
             >
               {foldersList ? <ExpandIcon /> : <CollapseIcon />}
+              <GripHorizontal />
             </span>
           )}
         </button>
 
-        <Link className="ml-2 btn" to={`/chapter/${chapter.id}`}>
-          <Ellipsis />
+        <Link className="btn" to={`/chapter/${chapter.id}`}>
+          <ExternalLink size={18} />
         </Link>
       </Reorder.Item>
 
