@@ -80,7 +80,7 @@ export default function TextToCopy({ open, setOpen }: TextToCopyProps) {
       <section
         className={`${
           texts.length === 0 ? "mt-0" : "mt-4"
-        } px-3 flex gap-2 items-center text-sm`}
+        } flex gap-2 items-center text-sm`}
       >
         <DraggableRow>
           {texts.map((text) => (

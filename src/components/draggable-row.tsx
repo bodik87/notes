@@ -16,7 +16,7 @@ export default function DraggableRow({ children }: Props) {
     if (divRef.current) {
       if (divRef.current.scrollWidth > divRef.current.clientWidth) {
         setParentWidth(
-          divRef.current.scrollWidth - divRef.current.clientWidth + 8
+          divRef.current.scrollWidth - divRef.current.clientWidth + 12
         );
       } else {
         setParentWidth(divRef.current.scrollWidth - divRef.current.clientWidth);
@@ -27,7 +27,7 @@ export default function DraggableRow({ children }: Props) {
   return (
     <div
       ref={divRef}
-      className="max-w-xl mx-auto w-full relative overflow-hidden"
+      className="pl-3 max-w-xl mx-auto w-full relative overflow-hidden"
     >
       <motion.div
         drag="x"
