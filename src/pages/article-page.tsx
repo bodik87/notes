@@ -1,18 +1,14 @@
 import { useState } from "react";
-import {
-  Link,
-  useNavigate,
-  useParams,
-  useSearchParams,
-} from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { useLocalStorage } from "usehooks-ts";
 import { IArticle, IFolder } from "../lib/types";
-import { DeleteIcon, LinkIcon, TransferIcon } from "../components/icons";
 import BackButton from "../components/back-button";
 import ContentEditable from "../components/content-editable";
 import Modal from "../components/modal";
-import { text } from "../lang";
 import LinksPanel from "../components/article-page/links-panel";
+import Links from "../components/article-page/links";
+import ArticleActions from "../components/article-page/article-actions";
+import { text } from "../lang";
 
 export default function ArticlePage() {
   const navigate = useNavigate();
@@ -112,29 +108,13 @@ export default function ArticlePage() {
           <BackButton />
 
           {existedArticle && (
-            <div className="flex items-center gap-2">
-              {folders.length > 1 && (
-                <button
-                  className="btn min-w-12 bg-app-green/15"
-                  onClick={() => setTransferModal(true)}
-                >
-                  <TransferIcon />
-                </button>
-              )}
-
-              <button
-                className="btn bg-app-blue/25"
-                onClick={() => setLinksModal(true)}
-              >
-                <LinkIcon />
-              </button>
-              <button
-                className="btn bg-app-red/10"
-                onClick={() => deleteArticle(existedArticle.id)}
-              >
-                <DeleteIcon />
-              </button>
-            </div>
+            <ArticleActions
+              deleteArticle={deleteArticle}
+              existedArticleId={existedArticle.id}
+              folders={folders}
+              setLinksModal={setLinksModal}
+              setTransferModal={setTransferModal}
+            />
           )}
         </div>
 
@@ -144,29 +124,7 @@ export default function ArticlePage() {
           placeholder={text.note[language]}
           className="px-1"
         />
-        {existedArticle && (
-          <>
-            {existedArticle.links && (
-              <>
-                {existedArticle.links.length > 0 && (
-                  <div className="mt-4 flex flex-col gap-4">
-                    {existedArticle.links.map((link) => (
-                      <Link
-                        key={link.id}
-                        to={link.url}
-                        target="_blank"
-                        className="text-app-blue flex items-center gap-2"
-                      >
-                        <LinkIcon size={18} />
-                        {link.title}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </>
-            )}
-          </>
-        )}
+        <Links existedArticle={existedArticle} />
       </section>
     </>
   );
