@@ -4,7 +4,7 @@ import { useLocalStorage } from "usehooks-ts";
 import { v4 as uuidv4 } from "uuid";
 import { IArticle, IChapter, IFolder } from "../lib/types";
 import BackButton from "../components/back-button";
-import { ChapterIcon, DeleteIcon, FolderIcon } from "../components/icons";
+import { DeleteIcon, FolderIcon } from "../components/icons";
 import { text } from "../lang";
 
 type Inputs = { chapterTitle: string };
@@ -90,7 +90,6 @@ export default function ChapterPage() {
       </div>
 
       <div className="parent-row">
-        <ChapterIcon />
         <form onSubmit={handleSubmit(onSubmit)}>
           <input
             {...register("chapterTitle", {

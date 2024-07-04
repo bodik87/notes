@@ -2,13 +2,7 @@ import { Link } from "react-router-dom";
 import { useLocalStorage } from "usehooks-ts";
 import { v4 as uuidv4 } from "uuid";
 import { IChapter, IFolder } from "../../lib/types";
-import {
-  ChapterIcon,
-  CollapseIcon,
-  ExpandIcon,
-  FolderIcon,
-  PlusIcon,
-} from "../icons";
+import { CollapseIcon, ExpandIcon, FolderIcon, PlusIcon } from "../icons";
 import { useState } from "react";
 import { Ellipsis } from "lucide-react";
 import { text } from "../../lang";
@@ -18,7 +12,7 @@ export default function Chapters() {
   const [chapters] = useLocalStorage<IChapter[]>("chapters", []);
   const newChapterId = uuidv4();
   return (
-    <section className="mt-4 px-3 flex flex-col gap-5">
+    <section className="mt-4 px-3 flex flex-col gap-4">
       {chapters.map((chapter) => (
         <ChapterItem key={chapter.id} chapter={chapter} />
       ))}
@@ -44,7 +38,7 @@ function ChapterItem({ chapter }: Props) {
   );
   return (
     <>
-      <div className="flex items-center">
+      <div className="flex items-center bg-app-gray rounded-3xl pl-5 pr-1.5 py-1.5">
         <button
           className="w-full flex items-center gap-3 text-lg font-medium"
           onClick={() => {
@@ -53,7 +47,6 @@ function ChapterItem({ chapter }: Props) {
             }
           }}
         >
-          <ChapterIcon />
           {chapter.chapterTitle}
 
           {currentFolders.length > 0 && (
@@ -63,10 +56,7 @@ function ChapterItem({ chapter }: Props) {
           )}
         </button>
 
-        <Link
-          className="ml-5 btn bg-app-blue/15 text-app-blue"
-          to={`/chapter/${chapter.id}`}
-        >
+        <Link className="ml-2 btn" to={`/chapter/${chapter.id}`}>
           <Ellipsis />
         </Link>
       </div>
@@ -77,7 +67,7 @@ function ChapterItem({ chapter }: Props) {
             <Link
               to={`/folders/${folder.id}`}
               key={folder.id}
-              className="ml-5 mb-5 last:mb-0 w-full flex gap-3 items-center whitespace-nowrap"
+              className="ml-5 mb-4 last:mb-0 w-full flex gap-3 items-center whitespace-nowrap"
             >
               <FolderIcon />
               {folder.folderTitle}
