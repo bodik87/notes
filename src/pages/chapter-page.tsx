@@ -93,6 +93,7 @@ export default function ChapterPage() {
             placeholder={text.chapterTitle[language]}
             autoComplete="off"
             spellCheck={"false"}
+            className="text-2xl"
             onKeyUp={(e) => e.key === "Enter" && e.currentTarget.blur()}
             autoFocus={!existedChapter}
           />

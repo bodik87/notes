@@ -15,7 +15,7 @@ export default function Modal({ center, setOpen, children }: Props) {
       />
       <div
         className={cn(
-          "p-4 bg-white rounded-3xl fixed max-w-md mx-auto shadow-md z-40",
+          "p-4 bg-white rounded-2xl fixed max-w-md mx-auto shadow-md z-40",
           center ? "inset-3 h-fit top-1/2 -translate-y-1/2" : "inset-x-3 top-3"
         )}
       >
