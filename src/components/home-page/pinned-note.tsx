@@ -16,7 +16,7 @@ export default function PinnedNote() {
         text={pinnedNote ? pinnedNote : null}
         setText={setPinnedNote}
         placeholder={text.pinnedNote[language]}
-        className="p-4 pb-5 text-lg rounded-3xl bg-app-gray"
+        className="p-4 pb-5 text-lg rounded-3xl bg-app-yellow-100"
       />
     </div>
   );

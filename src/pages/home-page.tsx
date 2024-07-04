@@ -6,7 +6,6 @@ import {
   QuickNoteIcon,
   SettingsIcon,
 } from "../components/icons";
-import { CircleCheck } from "lucide-react";
 import Chapters from "../components/home-page/chapters";
 import QuickNotes from "../components/home-page/quick-notes";
 import PinnedNote from "../components/home-page/pinned-note";
@@ -15,7 +14,6 @@ import Todos from "../components/home-page/todos";
 import { useState } from "react";
 
 export default function HomePage() {
-  const [todoModal, setTodoModal] = useState(false);
   const [textToCopyModal, setTextToCopyModal] = useState(false);
 
   const newChapterId = uuidv4();
@@ -40,13 +38,6 @@ export default function HomePage() {
           </Link>
 
           <button
-            className="btn bg-app-gray"
-            onClick={() => setTodoModal(true)}
-          >
-            <CircleCheck className="stroke-app-blue" />
-          </button>
-
-          <button
             className="btn bg-app-green/15"
             onClick={() => setTextToCopyModal(true)}
           >
@@ -62,7 +53,7 @@ export default function HomePage() {
       <PinnedNote />
       <TextToCopy open={textToCopyModal} setOpen={setTextToCopyModal} />
       <QuickNotes />
-      <Todos open={todoModal} setOpen={setTodoModal} />
+      <Todos />
       <Chapters />
     </section>
   );

@@ -38,7 +38,7 @@ form {
 }
 
 .page-header {
-  @apply h-[40px] mb-4 flex justify-between items-center gap-2;
+  @apply h-[40px] mb-4 w-full flex justify-between items-center gap-2;
 }
 
 .btn {

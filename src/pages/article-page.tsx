@@ -93,7 +93,7 @@ export default function ArticlePage() {
         </Modal>
       )}
 
-      <section className="page p-3">
+      <section className="page px-3">
         <div className="page-header">
           <BackButton />
 

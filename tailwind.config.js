@@ -10,6 +10,7 @@ export default {
       colors: {
         "app-gray": "#F0F1F3",
         "app-gray-200": "#ADB0B3",
+        "app-gray-300": "#6A6C6F",
         "app-green": "#47B378",
         "app-blue": "#1368C4",
         "app-red": "#FB4D2E",

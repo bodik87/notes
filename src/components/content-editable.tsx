@@ -45,7 +45,7 @@ export default function ContentEditable({
   }, [text]);
 
   return (
-    <div className="relative">
+    <>
       <div
         className={`${className} focus:outline-none shadow-none`}
         data-placeholder={placeholder}
@@ -57,7 +57,7 @@ export default function ContentEditable({
 
       <button
         className={cn(
-          "absolute -bottom-3 right-0 btn aspect-square font-bold transition-all duration-500 bg-transparent z-10",
+          "fixed top-3 right-3 btn font-bold transition-all duration-500 bg-transparent z-20",
           editTools
             ? "text-black bg-gray-300 scale-100 translate-y-0"
             : "bg-transparent text-transparent scale-80 -translate-y-1"
@@ -66,6 +66,6 @@ export default function ContentEditable({
       >
         B
       </button>
-    </div>
+    </>
   );
 }

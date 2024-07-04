@@ -34,7 +34,9 @@ export default function TextToCopy({ open, setOpen }: TextToCopyProps) {
   };
 
   const handleClose = (id: string) => {
-    setTexts(texts.filter((el) => el.id !== id));
+    if (confirm(`${text.delete[language]}?`) === true) {
+      setTexts(texts.filter((el) => el.id !== id));
+    }
   };
 
   return (
@@ -52,7 +54,10 @@ export default function TextToCopy({ open, setOpen }: TextToCopyProps) {
               autoFocus
             />
 
-            <button type="submit" className="btn mt-4 min-w-14 bg-app-green/25">
+            <button
+              type="submit"
+              className="btn mt-4 ml-auto w-20 bg-app-green/25"
+            >
               Ok
             </button>
           </form>
@@ -61,6 +66,7 @@ export default function TextToCopy({ open, setOpen }: TextToCopyProps) {
             <div className="mt-4 flex flex-wrap gap-2">
               {texts.map((text) => (
                 <Chip
+                  key={text.id}
                   id={text.id}
                   label={text.textToCopy}
                   onClose={handleClose}

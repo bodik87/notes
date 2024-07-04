@@ -8,16 +8,15 @@ import Modal from "../modal";
 import { TodoCheckedIcon, TodoIcon } from "../icons";
 import { cn } from "../../lib/utils";
 import Chip from "../chip";
+import { Plus } from "lucide-react";
 
 type Inputs = { todoBody: string };
-type TodosProps = {
-  open: boolean;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-};
 
-export default function Todos({ open, setOpen }: TodosProps) {
+export default function Todos() {
   const [language] = useLocalStorage<string>("lang", "EN");
   const [todos, setTodos] = useLocalStorage<ITodo[]>("todos", []);
+
+  const [todoModal, setTodoModal] = useState(false);
 
   const { register, handleSubmit, reset } = useForm<Inputs>();
 
@@ -30,18 +29,20 @@ export default function Todos({ open, setOpen }: TodosProps) {
         setTodos([...todos, newTodo]);
       }
       reset();
-      setOpen(false);
+      setTodoModal(false);
     }
   };
 
   const handleClose = (id: string) => {
-    setTodos(todos.filter((el) => el.id !== id));
+    if (confirm(`${text.delete[language]}?`) === true) {
+      setTodos(todos.filter((el) => el.id !== id));
+    }
   };
 
   return (
-    <section className={`${todos.length === 0 ? "mt-0" : "mt-4"} px-3`}>
-      {open && (
-        <Modal setOpen={setOpen}>
+    <section className="mt-4 px-3">
+      {todoModal && (
+        <Modal setOpen={setTodoModal}>
           <form onSubmit={handleSubmit(onSubmit)}>
             <input
               {...register("todoBody", { required: true })}
@@ -53,7 +54,10 @@ export default function Todos({ open, setOpen }: TodosProps) {
               autoFocus
             />
 
-            <button type="submit" className="btn mt-4 min-w-14 bg-app-gray">
+            <button
+              type="submit"
+              className="btn mt-4 ml-auto w-20 bg-app-blue/20"
+            >
               OK
             </button>
           </form>
@@ -61,21 +65,34 @@ export default function Todos({ open, setOpen }: TodosProps) {
           {todos.length > 0 && (
             <div className="mt-4 flex flex-wrap gap-2">
               {todos.map((todo) => (
-                <Chip
-                  id={todo.id}
-                  label={todo.todoBody}
-                  onClose={handleClose}
-                />
+                <div
+                  key={todo.id}
+                  className={cn("", todo.isCompleted && "opacity-80 grayscale")}
+                >
+                  <Chip
+                    id={todo.id}
+                    label={todo.todoBody}
+                    onClose={handleClose}
+                  />
+                </div>
               ))}
             </div>
           )}
         </Modal>
       )}
 
-      <div className="flex flex-col gap-2 text-sm">
+      <div className="flex flex-col gap-3 bg-app-gray p-4 rounded-3xl">
         {todos.map((todo) => (
           <TodoItem key={todo.id} todo={todo} />
         ))}
+
+        <button
+          onClick={() => setTodoModal(true)}
+          className={cn("flex gap-3", todos.length > 0 && "mt-2")}
+        >
+          <Plus className="stroke-app-blue" />
+          {text.addTodo[language]}
+        </button>
       </div>
     </section>
   );
@@ -102,7 +119,7 @@ function TodoItem({ todo }: TodoItemProps) {
   return (
     <button
       className={cn(
-        "flex items-center gap-3 text-lg",
+        "flex w-fit items-center gap-3 text-lg",
         todo.isCompleted ? "line-through text-app-gray-200" : ""
       )}
       onClick={() => handleChange(todo.id)}
