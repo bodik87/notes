@@ -138,6 +138,7 @@ function TodoItem({ items, todo }: TodoItemProps) {
       onDragEnd={() => setTodos(items)}
       dragListener={false}
       dragControls={controls}
+      dragConstraints={{ top: -20, bottom: 20 }}
       className={cn(
         "flex w-fit items-center gap-3 text-lg touch-none select-none",
         todo.isCompleted ? "line-through text-app-gray-200" : ""
