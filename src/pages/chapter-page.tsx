@@ -72,9 +72,9 @@ export default function ChapterPage() {
         <BackButton />
 
         {existedChapter && (
-          <div className="flex items-center gap-2">
+          <div className="actions-row">
             <button
-              className="btn bg-app-red/10"
+              className="btn"
               onClick={() => deleteChapter(existedChapter.id)}
             >
               <DeleteIcon />

@@ -17,26 +17,17 @@ export default function ArticleActions({
   existedArticleId,
 }: Props) {
   return (
-    <div className="flex items-center gap-2">
+    <div className="actions-row">
       {folders.length > 1 && (
-        <button
-          className="btn min-w-12 bg-app-green/15"
-          onClick={() => setTransferModal(true)}
-        >
+        <button className="btn" onClick={() => setTransferModal(true)}>
           <TransferIcon />
         </button>
       )}
 
-      <button
-        className="btn bg-app-blue/25"
-        onClick={() => setLinksModal(true)}
-      >
-        <LinkIcon />
+      <button className="btn" onClick={() => setLinksModal(true)}>
+        <LinkIcon size={22} />
       </button>
-      <button
-        className="btn bg-app-red/10"
-        onClick={() => deleteArticle(existedArticleId)}
-      >
+      <button className="btn" onClick={() => deleteArticle(existedArticleId)}>
         <DeleteIcon />
       </button>
     </div>

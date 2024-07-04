@@ -43,22 +43,16 @@ export default function HomePage() {
             <span className="-skew-x-6 -rotate-12 font-bold text-xl">N</span>
           </span>
 
-          <div className="flex gap-2 items-center">
-            <Link
-              to={`/quick-notes/${newQuickNoteId}`}
-              className="btn bg-app-yellow-100"
-            >
+          <div className="actions-row">
+            <Link to={`/quick-notes/${newQuickNoteId}`} className="btn">
               <QuickNoteIcon />
             </Link>
 
-            <button
-              className="btn bg-app-green/15"
-              onClick={() => setTextToCopyModal(true)}
-            >
+            <button className="btn" onClick={() => setTextToCopyModal(true)}>
               <CopyIcon />
             </button>
 
-            <Link className="btn bg-app-gray" to={"/user"}>
+            <Link className="btn" to={"/user"}>
               <SettingsIcon />
             </Link>
           </div>

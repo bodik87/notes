@@ -39,7 +39,7 @@ export function FolderIcon() {
 }
 
 export function DeleteIcon() {
-  return <Trash stroke="#FB4D2E" size={20} />;
+  return <Trash stroke="#FB4D2E" size={22} />;
 }
 
 export function TransferIcon() {
@@ -67,7 +67,7 @@ export function NoConnectionIcon() {
 }
 
 export function CopyIcon() {
-  return <Copy size={20} className="stroke-app-green" />;
+  return <Copy size={20} />;
 }
 
 export function QuickNoteIcon() {

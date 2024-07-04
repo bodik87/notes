@@ -123,25 +123,22 @@ export default function FolderPage() {
           <BackButton />
 
           {existedFolder && (
-            <div className="flex items-center gap-2">
+            <div className="actions-row">
               <Link
                 to={`/articles/${newArticleId}?folderId=${existedFolder.id}`}
-                className="btn bg-app-yellow-100"
+                className="btn"
               >
                 <QuickNoteIcon />
               </Link>
 
               {chapters.length > 1 && (
-                <button
-                  className="btn bg-app-green/15"
-                  onClick={() => setTransferModal(true)}
-                >
+                <button className="btn" onClick={() => setTransferModal(true)}>
                   <TransferIcon />
                 </button>
               )}
 
               <button
-                className="btn bg-app-red/10"
+                className="btn"
                 onClick={() => deleteFolder(existedFolder.id)}
               >
                 <DeleteIcon />
