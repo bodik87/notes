@@ -96,7 +96,7 @@ function ChapterItem({ chapter, items, setChapters }: Props) {
         </button>
 
         <Link className="btn" to={`/chapter/${chapter.id}`}>
-          <ExternalLink size={18} />
+          <ExternalLink size={18} className="stroke-app-blue" />
         </Link>
       </Reorder.Item>
 
