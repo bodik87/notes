@@ -4,7 +4,7 @@ import { useLocalStorage } from "usehooks-ts";
 import { v4 as uuidv4 } from "uuid";
 import { IArticle, IChapter, IFolder } from "../lib/types";
 import BackButton from "../components/back-button";
-import { DeleteIcon, FolderIcon } from "../components/icons";
+import { DeleteIcon, FolderIcon, PlusIcon } from "../components/icons";
 import { text } from "../lang";
 
 type Inputs = { chapterTitle: string };
@@ -73,12 +73,6 @@ export default function ChapterPage() {
 
         {existedChapter && (
           <div className="flex items-center gap-2">
-            <Link
-              to={`/folders/${newFolderId}?chapterId=${existedChapter.id}`}
-              className="btn bg-app-gray"
-            >
-              <FolderIcon />
-            </Link>
             <button
               className="btn bg-app-red/10"
               onClick={() => deleteChapter(existedChapter.id)}
@@ -118,6 +112,14 @@ export default function ChapterPage() {
               {folder.folderTitle}
             </Link>
           ))}
+
+      <Link
+        to={`/folders/${newFolderId}?chapterId=${existedChapter.id}`}
+        className="flex items-center gap-3 text-lg"
+      >
+        <PlusIcon />
+        {text.newFolder[language]}
+      </Link>
     </section>
   );
 }
