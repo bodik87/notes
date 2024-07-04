@@ -102,11 +102,11 @@ export const text: any = {
     RU: "Переместить",
     EN: "Transfer",
   },
-  chapters: {
-    PL: "Rozdziały",
-    UA: "Розділи",
-    RU: "Разделы",
-    EN: "Chapters",
+  chapter: {
+    PL: "Rozdział",
+    UA: "Розділ",
+    RU: "Раздел",
+    EN: "Chapter",
   },
   folders: {
     PL: "Przenieść",

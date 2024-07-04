@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import {
-  ChapterIcon,
   CopyIcon,
   QuickNoteIcon,
+  SearchIcon,
   SettingsIcon,
 } from "../components/icons";
 import Chapters from "../components/home-page/chapters";
@@ -26,10 +26,6 @@ export default function HomePage() {
         </span>
 
         <div className="flex gap-2 items-center">
-          <Link to={`/chapter/${newChapterId}`} className="btn bg-app-blue/15">
-            <ChapterIcon />
-          </Link>
-
           <Link
             to={`/quick-notes/${newQuickNoteId}`}
             className="btn bg-app-yellow-100"
@@ -43,6 +39,10 @@ export default function HomePage() {
           >
             <CopyIcon />
           </button>
+
+          <Link to={`/chapter/${newChapterId}`} className="btn bg-app-gray">
+            <SearchIcon />
+          </Link>
 
           <Link className="btn bg-app-gray" to={"/user"}>
             <SettingsIcon />

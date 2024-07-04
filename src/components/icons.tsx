@@ -10,11 +10,13 @@ import {
   Folder,
   Languages,
   Plus,
+  Search,
   Settings2,
   Text,
   Trash,
   UserCircle,
 } from "lucide-react";
+import { cn } from "../lib/utils";
 
 export function ChapterIcon() {
   return (
@@ -47,12 +49,16 @@ export function ExpandIcon() {
   return <ChevronUp />;
 }
 
+export function SearchIcon() {
+  return <Search />;
+}
+
 export function CollapseIcon() {
   return <ChevronDown />;
 }
 
-export function PlusIcon() {
-  return <Plus />;
+export function PlusIcon({ className }: { className?: string }) {
+  return <Plus className={cn("", className)} />;
 }
 
 export function FolderIcon() {

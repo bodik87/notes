@@ -5,10 +5,9 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { ITodo } from "../../lib/types";
 import { text } from "../../lang";
 import Modal from "../modal";
-import { TodoCheckedIcon, TodoIcon } from "../icons";
+import { PlusIcon, TodoCheckedIcon, TodoIcon } from "../icons";
 import { cn } from "../../lib/utils";
 import Chip from "../chip";
-import { Plus } from "lucide-react";
 
 type Inputs = { todoBody: string };
 
@@ -90,7 +89,7 @@ export default function Todos() {
           onClick={() => setTodoModal(true)}
           className={cn("flex gap-3", todos.length > 0 && "mt-2")}
         >
-          <Plus className="stroke-app-blue" />
+          <PlusIcon className="stroke-app-blue" />
           {text.addTodo[language]}
         </button>
       </div>

@@ -34,7 +34,7 @@ form {
 }
 
 .page {
-  @apply wrapper flex flex-col min-h-dvh py-3;
+  @apply wrapper flex flex-col min-h-dvh pt-3 pb-6;
 }
 
 .page-header {

@@ -1,23 +1,26 @@
 import { Link } from "react-router-dom";
 import { useLocalStorage } from "usehooks-ts";
+import { v4 as uuidv4 } from "uuid";
 import { IChapter, IFolder } from "../../lib/types";
-import { ChapterIcon, FolderIcon } from "../icons";
+import { ChapterIcon, FolderIcon, PlusIcon } from "../icons";
 import { useState } from "react";
 import { Ellipsis } from "lucide-react";
+import { text } from "../../lang";
 
 export default function Chapters() {
+  const [language] = useLocalStorage<string>("lang", "EN");
   const [chapters] = useLocalStorage<IChapter[]>("chapters", []);
-
+  const newChapterId = uuidv4();
   return (
-    <>
-      {chapters.length > 0 && (
-        <section className="mt-4 px-3 flex flex-col gap-5">
-          {chapters.map((chapter) => (
-            <ChapterItem key={chapter.id} chapter={chapter} />
-          ))}
-        </section>
-      )}
-    </>
+    <section className="mt-4 px-3 flex flex-col gap-5">
+      {chapters.map((chapter) => (
+        <ChapterItem key={chapter.id} chapter={chapter} />
+      ))}
+
+      <Link to={`/chapter/${newChapterId}`} className="flex gap-3">
+        <PlusIcon className="stroke-app-blue" /> {text.chapter[language]}
+      </Link>
+    </section>
   );
 }
 
