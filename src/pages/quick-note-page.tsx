@@ -54,7 +54,7 @@ export default function QuickNotePage() {
 
         {existedQuickNote && (
           <button
-            className="btn bg-app-red/15"
+            className="btn"
             onClick={() => deleteFastNote(existedQuickNote.id)}
           >
             <DeleteIcon />

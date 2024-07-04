@@ -5,7 +5,6 @@ import { useLocalStorage } from "usehooks-ts";
 import { CopyIcon, QuickNoteIcon, SettingsIcon } from "../components/icons";
 import Chapters from "../components/home-page/chapters";
 import QuickNotes from "../components/home-page/quick-notes";
-import PinnedNote from "../components/home-page/pinned-note";
 import Todos from "../components/home-page/todos";
 import Modal from "../components/modal";
 import Snippets from "../components/home-page/text-to-copy";
@@ -58,7 +57,6 @@ export default function HomePage() {
           </div>
         </div>
 
-        <PinnedNote />
         <Snippets open={textToCopyModal} setOpen={setTextToCopyModal} />
         <QuickNotes />
         <Todos />
