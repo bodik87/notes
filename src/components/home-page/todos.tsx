@@ -44,10 +44,8 @@ export default function Todos() {
     }
   };
 
-  console.log(items);
-
   return (
-    <section className="mt-4 px-3">
+    <section className="mt-4 pc:px-3">
       {todoModal && (
         <Modal setOpen={setTodoModal}>
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -88,7 +86,7 @@ export default function Todos() {
         </Modal>
       )}
 
-      <div className="bg-app-gray p-4 rounded-3xl">
+      <div className="bg-app-gray p-4 pc:rounded-3xl">
         <Reorder.Group
           axis="y"
           values={items}
