@@ -45,12 +45,12 @@ export function ChapterIcon() {
   );
 }
 
-export function ExpandIcon() {
-  return <ChevronUp />;
-}
-
 export function SearchIcon() {
   return <Search />;
+}
+
+export function ExpandIcon() {
+  return <ChevronUp />;
 }
 
 export function CollapseIcon() {
