@@ -3,19 +3,40 @@ import { useLocalStorage } from "usehooks-ts";
 import { v4 as uuidv4 } from "uuid";
 import { IChapter, IFolder } from "../../lib/types";
 import { CollapseIcon, ExpandIcon, FolderIcon, PlusIcon } from "../icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Ellipsis } from "lucide-react";
 import { text } from "../../lang";
+import { Reorder, useDragControls } from "framer-motion";
 
 export default function Chapters() {
   const [language] = useLocalStorage<string>("lang", "EN");
-  const [chapters] = useLocalStorage<IChapter[]>("chapters", []);
+  const [chapters, setChapters] = useLocalStorage<IChapter[]>("chapters", []);
+
+  const [items, setItems] = useState(chapters);
+
+  useEffect(() => {
+    setItems(chapters);
+  }, [chapters]);
+
   const newChapterId = uuidv4();
+
   return (
     <section className="mt-4 px-3 flex flex-col gap-4">
-      {chapters.map((chapter) => (
-        <ChapterItem key={chapter.id} chapter={chapter} />
-      ))}
+      <Reorder.Group
+        axis="y"
+        values={items}
+        onReorder={setItems}
+        className="flex flex-col gap-3"
+      >
+        {items.map((chapter) => (
+          <ChapterItem
+            key={chapter.id}
+            chapter={chapter}
+            items={items}
+            setChapters={setChapters}
+          />
+        ))}
+      </Reorder.Group>
 
       <Link
         to={`/chapter/${newChapterId}`}
@@ -27,18 +48,32 @@ export default function Chapters() {
   );
 }
 
-type Props = { chapter: IChapter };
+type Props = {
+  chapter: IChapter;
+  items: IChapter[];
+  setChapters: React.Dispatch<React.SetStateAction<IChapter[]>>;
+};
 
-function ChapterItem({ chapter }: Props) {
+function ChapterItem({ chapter, items, setChapters }: Props) {
   const [folders] = useLocalStorage<IFolder[]>("folders", []);
   const [foldersList, setFoldersList] = useState(false);
+
+  const controls = useDragControls();
 
   const currentFolders = folders.filter(
     (folder) => folder.chapterId === chapter.id
   );
   return (
     <>
-      <div className="flex items-center bg-app-gray rounded-3xl pl-5 pr-1.5 py-1.5">
+      <Reorder.Item
+        key={chapter.id}
+        value={chapter}
+        onDragEnd={() => setChapters(items)}
+        dragListener={false}
+        dragControls={controls}
+        dragConstraints={{ top: -20, bottom: 20 }}
+        className="flex items-center bg-app-gray rounded-3xl pl-5 pr-1.5 py-1.5 border touch-none"
+      >
         <button
           className="w-full flex items-center gap-3 text-lg font-medium"
           onClick={() => {
@@ -50,7 +85,10 @@ function ChapterItem({ chapter }: Props) {
           {chapter.chapterTitle}
 
           {currentFolders.length > 0 && (
-            <span className="ml-auto">
+            <span
+              onPointerDown={(e) => controls.start(e)}
+              className="ml-auto cursor-grab active:cursor-grabbing"
+            >
               {foldersList ? <ExpandIcon /> : <CollapseIcon />}
             </span>
           )}
@@ -59,7 +97,7 @@ function ChapterItem({ chapter }: Props) {
         <Link className="ml-2 btn" to={`/chapter/${chapter.id}`}>
           <Ellipsis />
         </Link>
-      </div>
+      </Reorder.Item>
 
       {foldersList && (
         <div>
