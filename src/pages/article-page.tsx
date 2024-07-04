@@ -41,6 +41,7 @@ export default function ArticlePage() {
           id: existedArticle.id,
           articleBody: text,
           folderId: existedArticle.folderId,
+          links: existedArticle.links,
         };
 
         const updatedArticles = articles.map((el) => {
