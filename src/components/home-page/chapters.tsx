@@ -67,7 +67,7 @@ function ChapterItem({ chapter }: Props) {
             <Link
               to={`/folders/${folder.id}`}
               key={folder.id}
-              className="ml-5 mb-4 last:mb-0 w-full flex gap-3 items-center whitespace-nowrap"
+              className="ml-5 mb-4 last:mb-0 w-full flex gap-3 items-center text-lg whitespace-nowrap"
             >
               <FolderIcon />
               {folder.folderTitle}

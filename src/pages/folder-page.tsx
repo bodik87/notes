@@ -215,12 +215,12 @@ function ArticleItem({ article, existedFolder }: ArticleItemProps) {
   return (
     <Link
       to={`/articles/${article.id}?folderId=${existedFolder.id}`}
-      className="p-4 max-h-[180px] text-sm rounded-3xl bg-app-gray overflow-hidden"
+      className="p-4 max-h-[300px] text-sm rounded-3xl bg-app-gray overflow-hidden"
     >
       <ContentEditablePreview
         text={
-          article.articleBody.length > 95
-            ? article.articleBody.slice(0, 95) + "..."
+          article.articleBody.length > 250
+            ? article.articleBody.slice(0, 250) + "..."
             : article.articleBody
         }
       />
