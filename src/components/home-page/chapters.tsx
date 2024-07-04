@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import { IChapter, IFolder } from "../../lib/types";
 import { CollapseIcon, ExpandIcon, FolderIcon, PlusIcon } from "../icons";
 import { useEffect, useState } from "react";
-import { EllipsisVertical, GripHorizontal } from "lucide-react";
+import { EllipsisVertical } from "lucide-react";
 import { text } from "../../lang";
 import { Reorder, useDragControls } from "framer-motion";
 
@@ -90,7 +90,6 @@ function ChapterItem({ chapter, items, setChapters }: Props) {
               className="btn bg-app-blue/15 ml-auto cursor-grab active:cursor-grabbing"
             >
               {foldersList ? <ExpandIcon /> : <CollapseIcon />}
-              <GripHorizontal />
             </span>
           )}
         </button>

@@ -5,7 +5,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { Reorder, useDragControls } from "framer-motion";
 import { ITodo } from "../../lib/types";
 import { text } from "../../lang";
-import { TodoCheckedIcon, TodoIcon } from "../icons";
+import { PlusIcon, TodoCheckedIcon, TodoIcon } from "../icons";
 import { cn } from "../../lib/utils";
 import Chip from "../chip";
 import Modal from "../modal";
@@ -44,6 +44,13 @@ export default function Todos() {
     }
   };
 
+  const handleDeleteSelected = () => {
+    if (confirm(`${text.delete[language]}?`) === true) {
+      const filteredTodos = todos.filter((todo) => !todo.isCompleted);
+      setTodos(filteredTodos);
+    }
+  };
+
   return (
     <section className="mt-4 pc:px-3">
       {todoModal && (
@@ -54,21 +61,28 @@ export default function Todos() {
               placeholder={text.todo[language]}
               autoComplete="off"
               spellCheck={"false"}
-              className="bg-transparent"
+              className="bg-transparent text-lg"
               onKeyUp={(e) => e.key === "Enter" && e.currentTarget.blur()}
               autoFocus
             />
 
-            <button
-              type="submit"
-              className="btn mt-4 ml-auto w-20 bg-app-blue/20"
-            >
-              OK
-            </button>
+            <div className="mt-4 flex justify-end gap-2 items-center">
+              {todos.filter((todo) => todo.isCompleted).length > 0 && (
+                <button
+                  onClick={handleDeleteSelected}
+                  className="btn bg-app-red/10 text-app-red"
+                >
+                  {text.addCompletedTodos[language]}
+                </button>
+              )}
+              <button type="submit" className="btn w-20 bg-app-blue/20">
+                OK
+              </button>
+            </div>
           </form>
 
           {todos.length > 0 && (
-            <div className="mt-4 flex flex-wrap gap-2">
+            <div className="mt-8 flex flex-wrap gap-2">
               {todos.map((todo) => (
                 <div
                   key={todo.id}
@@ -102,6 +116,7 @@ export default function Todos() {
           onClick={() => setTodoModal(true)}
           className={cn("btn bg-app-blue/15", todos.length > 0 && "mt-5")}
         >
+          <PlusIcon className="stroke-app-blue" />
           {text.addTodo[language]}
         </button>
       </div>

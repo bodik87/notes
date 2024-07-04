@@ -49,7 +49,7 @@ export default function TextToCopy({ open, setOpen }: TextToCopyProps) {
               placeholder={text.textToCopy[language]}
               autoComplete="off"
               spellCheck={"false"}
-              className="bg-transparent"
+              className="bg-transparent text-lg"
               onKeyUp={(e) => e.key === "Enter" && e.currentTarget.blur()}
               autoFocus
             />

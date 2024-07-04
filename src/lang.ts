@@ -162,4 +162,10 @@ export const text: any = {
     RU: "Задачи",
     EN: "Todos",
   },
+  addCompletedTodos: {
+    PL: "Usuwanie zakończone",
+    UA: "Видалити виконане",
+    RU: "Удалить выполненное",
+    EN: "Delete completed",
+  },
 };
