@@ -23,11 +23,11 @@ export function SearchIcon() {
 }
 
 export function ExpandIcon() {
-  return <ChevronUp />;
+  return <ChevronUp className="stroke-app-gray-200" />;
 }
 
 export function CollapseIcon() {
-  return <ChevronDown />;
+  return <ChevronDown className="stroke-app-gray-200" />;
 }
 
 export function PlusIcon({ className }: { className?: string }) {

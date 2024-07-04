@@ -72,7 +72,7 @@ function ChapterItem({ chapter, items, setChapters }: Props) {
         dragListener={false}
         dragControls={controls}
         dragConstraints={{ top: -20, bottom: 20 }}
-        className="flex items-center bg-app-blue/10 backdrop-blur-3xl rounded-3xl pl-5 pr-1.5 py-1.5 touch-none"
+        className="flex items-center bg-app-blue/10 backdrop-blur-3xl rounded-2xl pl-5 pr-1.5 py-1.5 touch-none"
       >
         <button
           className="w-full flex items-center gap-3 text-lg font-medium"
@@ -87,7 +87,7 @@ function ChapterItem({ chapter, items, setChapters }: Props) {
           {currentFolders.length > 0 && (
             <span
               onPointerDown={(e) => controls.start(e)}
-              className="btn bg-app-blue/15 ml-auto cursor-grab active:cursor-grabbing"
+              className="btn ml-auto cursor-grab active:cursor-grabbing"
             >
               {foldersList ? <ExpandIcon /> : <CollapseIcon />}
             </span>

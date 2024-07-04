@@ -65,7 +65,7 @@ export default function QuickNotePage() {
       <ContentEditable
         setText={onSubmit}
         placeholder={text.quickNote[language]}
-        className="p-4 pb-5 text-lg rounded-3xl bg-yellow-100"
+        className="p-4 pb-5 text-lg rounded-2xl bg-yellow-100"
         text={existedQuickNote ? existedQuickNote.quickNoteBody : ""}
       />
     </section>
