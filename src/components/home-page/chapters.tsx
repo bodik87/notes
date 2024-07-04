@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import { IChapter, IFolder } from "../../lib/types";
 import { CollapseIcon, ExpandIcon, FolderIcon, PlusIcon } from "../icons";
 import { useEffect, useState } from "react";
-import { ExternalLink, GripHorizontal } from "lucide-react";
+import { EllipsisVertical, GripHorizontal } from "lucide-react";
 import { text } from "../../lang";
 import { Reorder, useDragControls } from "framer-motion";
 
@@ -96,7 +96,7 @@ function ChapterItem({ chapter, items, setChapters }: Props) {
         </button>
 
         <Link className="btn" to={`/chapter/${chapter.id}`}>
-          <ExternalLink size={18} className="stroke-app-blue" />
+          <EllipsisVertical />
         </Link>
       </Reorder.Item>
 
