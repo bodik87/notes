@@ -52,7 +52,7 @@ export default function Todos() {
   };
 
   return (
-    <section className="pc:px-3">
+    <section className="mt-4 pc:px-3">
       {todoModal && (
         <Modal setOpen={setTodoModal}>
           <form onSubmit={handleSubmit(onSubmit)}>

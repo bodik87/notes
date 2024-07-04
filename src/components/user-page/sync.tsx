@@ -7,8 +7,7 @@ import {
   IChapter,
   IFolder,
   IPinnedNote,
-  IQuickNote,
-  ITextToCopy,
+  ISnippet,
   ITodo,
   IUser,
 } from "../../lib/types";
@@ -23,9 +22,8 @@ type Props = {
 
 type Result = {
   pinnedNote: IPinnedNote;
-  texts: ITextToCopy[];
+  snippets: ISnippet[];
   todos: ITodo[];
-  quickNotes: IQuickNote[];
   chapters: IChapter[];
   folders: IFolder[];
   articles: IArticle[];
@@ -38,11 +36,9 @@ export default function Sync({
   setError,
 }: Props) {
   const navigate = useNavigate();
-  const [quickNotes, setQuickNotes] = useLocalStorage<IQuickNote[]>(
-    "quickNotes",
-    []
-  );
-  const [texts, setTexts] = useLocalStorage<ITextToCopy[]>("texts", []);
+
+  const [language] = useLocalStorage<string>("lang", "EN");
+  const [snippets, setSnippets] = useLocalStorage<ISnippet[]>("snippets", []);
   const [todos, setTodos] = useLocalStorage<ITodo[]>("todos", []);
   const [chapters, setChapters] = useLocalStorage<IChapter[]>("chapters", []);
   const [folders, setFolders] = useLocalStorage<IFolder[]>("folders", []);
@@ -51,7 +47,6 @@ export default function Sync({
     "pinnedNote",
     null
   );
-  const [language] = useLocalStorage<string>("lang", "EN");
 
   const deleteLocalUser = () => {
     localStorage.clear();
@@ -67,9 +62,8 @@ export default function Sync({
       if (user) {
         set(ref(DATABASE, RD_PROJECT_ITEMS + user.name), {
           pinnedNote,
-          texts,
+          snippets,
           todos,
-          quickNotes,
           chapters,
           folders,
           articles,
@@ -100,15 +94,13 @@ export default function Sync({
                 if (result.pinnedNote) {
                   setPinnedNote(result.pinnedNote);
                 }
-                if (result.texts) {
-                  setTexts(result.texts);
+                if (result.snippets) {
+                  setSnippets(result.snippets);
                 }
                 if (result.todos) {
                   setTodos(result.todos);
                 }
-                if (result.quickNotes) {
-                  setQuickNotes(result.quickNotes);
-                }
+
                 if (result.chapters) {
                   setChapters(result.chapters);
                 }
