@@ -23,7 +23,10 @@ export default function Chapters() {
         <ChapterItem key={chapter.id} chapter={chapter} />
       ))}
 
-      <Link to={`/chapter/${newChapterId}`} className="flex gap-3">
+      <Link
+        to={`/chapter/${newChapterId}`}
+        className="flex items-center gap-3 text-lg"
+      >
         <PlusIcon className="stroke-app-blue" /> {text.chapter[language]}
       </Link>
     </section>
@@ -43,7 +46,7 @@ function ChapterItem({ chapter }: Props) {
     <>
       <div className="flex items-center">
         <button
-          className="w-full flex items-center gap-3 text-lg"
+          className="w-full flex items-center gap-3 text-lg font-medium"
           onClick={() => {
             if (currentFolders.length > 0) {
               setFoldersList(!foldersList);
