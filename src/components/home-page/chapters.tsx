@@ -72,7 +72,7 @@ function ChapterItem({ chapter, items, setChapters }: Props) {
         dragListener={false}
         dragControls={controls}
         dragConstraints={{ top: -20, bottom: 20 }}
-        className="flex items-center bg-app-blue/10 backdrop-blur-3xl rounded-2xl pl-5 pr-1.5 py-1.5 touch-none"
+        className="pl-1 flex items-center touch-none"
       >
         <button
           className="w-full flex items-center gap-3 text-lg font-medium"

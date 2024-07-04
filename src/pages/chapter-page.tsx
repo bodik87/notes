@@ -99,27 +99,30 @@ export default function ChapterPage() {
         </form>
       </div>
 
-      {existedChapter &&
-        folders
-          .filter((folder) => folder.chapterId === existedChapter.id)
-          .map((folder) => (
-            <Link
-              to={`/folders/${folder.id}?chapterId=${existedChapter.id}`}
-              key={folder.id}
-              className="child-row"
-            >
-              <FolderIcon />
-              {folder.folderTitle}
-            </Link>
-          ))}
+      {existedChapter && (
+        <>
+          {folders
+            .filter((folder) => folder.chapterId === existedChapter.id)
+            .map((folder) => (
+              <Link
+                to={`/folders/${folder.id}?chapterId=${existedChapter.id}`}
+                key={folder.id}
+                className="child-row"
+              >
+                <FolderIcon />
+                {folder.folderTitle}
+              </Link>
+            ))}
 
-      <Link
-        to={`/folders/${newFolderId}?chapterId=${existedChapter.id}`}
-        className="flex items-center gap-3 text-lg"
-      >
-        <PlusIcon />
-        {text.newFolder[language]}
-      </Link>
+          <Link
+            to={`/folders/${newFolderId}?chapterId=${existedChapter.id}`}
+            className="flex items-center gap-3 text-lg"
+          >
+            <PlusIcon />
+            {text.newFolder[language]}
+          </Link>
+        </>
+      )}
     </section>
   );
 }
