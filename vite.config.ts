@@ -37,6 +37,8 @@ const manifestForPlugin: any = {
     theme_color: "#FFF",
     background_color: "#FFF",
     display: "standalone",
+    scope: "/",
+    start_url: "/(.*)",
     orientation: "portrait",
   },
 };
