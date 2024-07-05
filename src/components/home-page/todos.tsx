@@ -9,13 +9,21 @@ import { PlusIcon, TodoCheckedIcon, TodoIcon } from "../icons";
 import { cn } from "../../lib/utils";
 import Chip from "../chip";
 import Modal from "../modal";
+import Progress from "../progress";
 
 type Inputs = { todoBody: string };
+
+const BLUE = "#1368C4";
+// const GRAY = "#989B9E";
 
 export default function Todos() {
   const [language] = useLocalStorage<string>("lang", "EN");
   const [todos, setTodos] = useLocalStorage<ITodo[]>("todos", []);
   const [items, setItems] = useState(todos);
+
+  const itemsLength = todos.length;
+  const completedItemsLength = todos.filter((el) => el.isCompleted).length;
+  const percentage = Math.round((completedItemsLength / itemsLength) * 100);
 
   useEffect(() => {
     setItems(todos);
@@ -116,7 +124,13 @@ export default function Todos() {
           onClick={() => setTodoModal(true)}
           className={cn("btn bg-app-blue/15 !pr-5", todos.length > 0 && "mt-5")}
         >
-          <PlusIcon className="stroke-app-blue" />
+          <Progress
+            percentage={percentage}
+            bgColor={BLUE}
+            accentColor="white"
+            size={14}
+            padding={2}
+          />
           {text.addTodo[language]}
         </button>
       </div>
