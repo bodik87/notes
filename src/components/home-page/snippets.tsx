@@ -5,17 +5,17 @@ import { CircleX, Copy } from "lucide-react";
 import { ISnippet } from "../../lib/types";
 import Modal from "../modal";
 import { text } from "../../lang";
+import { useState } from "react";
+import { CopyIcon } from "../icons";
 
 type Inputs = { body: string };
 
-type SnippetsProps = {
-  open: boolean;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-export default function Snippets({ open, setOpen }: SnippetsProps) {
+export default function Snippets() {
   const [language] = useLocalStorage<string>("lang", "EN");
   const [snippets, setSnippets] = useLocalStorage<ISnippet[]>("snippets", []);
+
+  const [textToCopyModal, setTextToCopyModal] = useState(false);
+
   const { register, handleSubmit, reset } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = ({ body }) => {
@@ -27,7 +27,7 @@ export default function Snippets({ open, setOpen }: SnippetsProps) {
         setSnippets([...snippets, newText]);
       }
       reset();
-      setOpen(false);
+      setTextToCopyModal(false);
     }
   };
 
@@ -39,8 +39,12 @@ export default function Snippets({ open, setOpen }: SnippetsProps) {
 
   return (
     <>
-      {open && (
-        <Modal setOpen={setOpen}>
+      <button className="btn" onClick={() => setTextToCopyModal(true)}>
+        <CopyIcon />
+      </button>
+
+      {textToCopyModal && (
+        <Modal setOpen={setTextToCopyModal}>
           <form onSubmit={handleSubmit(onSubmit)}>
             <input
               {...register("body", { required: true })}

@@ -46,7 +46,7 @@ form {
 }
 
 .btn {
-  @apply h-[40px] min-w-12 px-3.5 flex gap-2 items-center justify-center rounded-2xl select-none;
+  @apply h-[40px] min-w-14 px-3.5 flex gap-2 items-center justify-center rounded-2xl select-none;
 }
 
 .parent-row {

@@ -5,7 +5,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { Reorder, useDragControls } from "framer-motion";
 import { ITodo } from "../../lib/types";
 import { text } from "../../lang";
-import { PlusIcon, TodoCheckedIcon, TodoIcon } from "../icons";
+import { TodoCheckedIcon, TodoIcon } from "../icons";
 import { cn } from "../../lib/utils";
 import Chip from "../chip";
 import Modal from "../modal";
@@ -125,7 +125,7 @@ export default function Todos() {
           className={cn("btn bg-app-blue/15 !pr-5", todos.length > 0 && "mt-5")}
         >
           <Progress
-            percentage={percentage}
+            percentage={itemsLength === 0 ? 0 : percentage}
             bgColor={BLUE}
             accentColor="white"
             size={14}
