@@ -158,9 +158,9 @@ export const text: any = {
   },
   addTodo: {
     PL: "Zadania",
-    UA: "Задачi",
-    RU: "Задачи",
-    EN: "Todos",
+    UA: "Нова задача",
+    RU: "Новая задача",
+    EN: "New todo",
   },
   addCompletedTodos: {
     PL: "Usuwanie zakończone",

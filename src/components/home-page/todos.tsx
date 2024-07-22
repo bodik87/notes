@@ -109,20 +109,12 @@ export default function Todos() {
       )}
 
       <div className="bg-app-gray p-4 pc:rounded-3xl">
-        <Reorder.Group
-          axis="y"
-          values={items}
-          onReorder={setItems}
-          className="flex flex-col gap-3"
-        >
-          {items.map((todo) => (
-            <TodoItem key={todo.id} todo={todo} items={items} />
-          ))}
-        </Reorder.Group>
-
         <button
           onClick={() => setTodoModal(true)}
-          className={cn("btn bg-app-blue/15 !pr-5", todos.length > 0 && "mt-5")}
+          className={cn(
+            "flex items-center gap-3 font-semibold text-lg",
+            todos.length > 0 && "mb-5"
+          )}
         >
           <Progress
             percentage={itemsLength === 0 ? 0 : percentage}
@@ -133,6 +125,17 @@ export default function Todos() {
           />
           {text.addTodo[language]}
         </button>
+
+        <Reorder.Group
+          axis="y"
+          values={items}
+          onReorder={setItems}
+          className="flex flex-col gap-3"
+        >
+          {items.map((todo) => (
+            <TodoItem key={todo.id} todo={todo} items={items} />
+          ))}
+        </Reorder.Group>
       </div>
     </section>
   );

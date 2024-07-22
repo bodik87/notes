@@ -122,7 +122,8 @@ export default function ArticlePage() {
           text={existedArticle ? existedArticle.articleBody : ""}
           setText={onSubmit}
           placeholder={text.note[language]}
-          className="px-1"
+          className="p-2"
+          toolbar={true}
         />
         <Links existedArticle={existedArticle} />
       </section>

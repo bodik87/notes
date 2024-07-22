@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect, useRef, useState } from "react";
-import { cn } from "../lib/utils";
+import { useEffect, useRef } from "react";
 
 type Props = {
   text: any;
   setText: any;
   placeholder: string;
   className?: string;
+  toolbar?: boolean;
 };
 
 export default function ContentEditable({
@@ -14,9 +14,8 @@ export default function ContentEditable({
   setText,
   placeholder,
   className,
+  toolbar,
 }: Props) {
-  const [editTools, setEditTools] = useState(false);
-
   const textRef = useRef<HTMLDivElement>(null);
 
   const handleTextFormat = () => {
@@ -34,7 +33,6 @@ export default function ContentEditable({
     const bodyText = textRef.current;
     if (bodyText) {
       setText(bodyText.innerHTML);
-      setEditTools(false);
     }
   };
 
@@ -47,26 +45,24 @@ export default function ContentEditable({
   return (
     <>
       <div
-        className={`${className} focus:outline-none shadow-none`}
+        className={`${className} focus:outline-none shadow-none cursor-text`}
         data-placeholder={placeholder}
         contentEditable="true"
         spellCheck={false}
         ref={textRef}
-        onFocus={() => setEditTools(true)}
         onBlur={handleSaveText}
       />
 
-      <button
-        className={cn(
-          "fixed top-3 left-20 btn w-14 font-bold transition-all duration-500 bg-transparent z-20",
-          editTools
-            ? " text-black bg-gray-300 scale-100"
-            : "bg-transparent text-transparent scale-80"
-        )}
-        onClick={handleTextFormat}
-      >
-        B
-      </button>
+      {toolbar && (
+        <div className="bg-gray-100 rounded-2xl">
+          <button
+            className="h-8 w-14 font-bold text-black scale-100"
+            onClick={handleTextFormat}
+          >
+            B
+          </button>
+        </div>
+      )}
     </>
   );
 }
